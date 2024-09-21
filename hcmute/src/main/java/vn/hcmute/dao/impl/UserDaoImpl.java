@@ -8,7 +8,7 @@ import vn.hcmute.config.DBConnectionSQLServer;
 import vn.hcmute.dao.IUserDao;
 import vn.hcmute.models.UserModel;
 
-public class UserDaoImpl implements IUserDao{
+public class UserDaoImpl implements IUserDao {
 	public UserModel findUserByUsername(String username) {
 		try {
 			Connection conn = new DBConnectionSQLServer().getConnection();
@@ -17,7 +17,7 @@ public class UserDaoImpl implements IUserDao{
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			UserModel user = null;
-			while(rs.next()) {
+			while (rs.next()) {
 				user = new UserModel();
 				user.setId(rs.getInt("id"));
 				user.setUsername(rs.getString("username"));
@@ -30,21 +30,53 @@ public class UserDaoImpl implements IUserDao{
 			}
 			conn.close();
 			return user;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+
+	@Override
+	public boolean addUser(UserModel user) {
+		if (existsUser(user.getUsername())) {
+			return false;
+		} else {
+			try {
+				Connection conn = new DBConnectionSQLServer().getConnection();
+				String sql = "insert into users(username, password, email, fullname, image, roleid, phone) values (?,?,?,?,?,?,?)";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, user.getUsername());
+				ps.setString(2, user.getPassword());
+				ps.setString(3, user.getEmail());
+				ps.setString(4, user.getFullname());
+				ps.setString(5, user.getImage());
+				ps.setInt(6, user.getRoleid());
+				ps.setString(7, user.getPhone());
+				ps.executeUpdate();
+				return true;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return false;
+			}
+		}
+	}
+
+	@Override
+	public boolean existsUser(String username) {
+		return this.findUserByUsername(username) != null;
+	}
+
 	public static void main(String[] args) {
 		try {
 			IUserDao userDao = new UserDaoImpl();
-			UserModel user = userDao.findUserByUsername("ldb");
-			System.out.println(user.toString());
-		}
-		catch (Exception e) {
+			UserModel user = new UserModel();
+			user.setUsername("lamduybao03");
+			user.setPassword("123");
+			user.setFullname("Lam Duy Bao");
+			System.out.println(userDao.addUser(user));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

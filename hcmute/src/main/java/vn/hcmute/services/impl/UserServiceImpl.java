@@ -28,6 +28,10 @@ public class UserServiceImpl implements IUserService {
 			return null;
 		}
 	}
+	
+	public boolean addUser(UserModel user) {
+		return userDao.addUser(user);
+	}
 
 	public static void main(String[] args) {
 		try {

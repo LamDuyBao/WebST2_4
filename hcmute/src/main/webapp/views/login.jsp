@@ -10,6 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:if test="${alert != null }">
+		<h3 class="alert alert-danger">${alert}</h3>
+	</c:if>
 	<form action="/hcmute/login" method="post">
 		<div class="container">
 			<label for="uname"><b>Username</b></label> <input type="text"
@@ -23,8 +26,8 @@
 			</label>
 		</div>
 		<div class="container" style="background-color: #f1f1f1">
-			<button type="button" class="cancelbtn">Cancel</button>
-			<span class="psw">Forgot <a href="#">password?</a></span>
+			<span class="psw"><a href="/hcmute/register">Register</a></span>
+			<span class="psw"><a href="/hcmute/forgotpassword">Forgot password</a></span>
 		</div>
 	</form>
 

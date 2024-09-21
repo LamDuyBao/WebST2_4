@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Hello user
+	<div class = "text">Hello user</div>
+	<a href="/hcmute/login">logout</a>
 </body>
 </html>
