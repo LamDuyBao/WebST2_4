@@ -27,7 +27,7 @@
 		</div>
 		<div class="container" style="background-color: #f1f1f1">
 			<span class="psw"><a href="/hcmute/register">Register</a></span>
-			<span class="psw"><a href="/hcmute/forgotpassword">Forgot password</a></span>
+			<span class="psw"><a href="/hcmute/forgetpass">Forgot password</a></span>
 		</div>
 	</form>
 

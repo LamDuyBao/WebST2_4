@@ -66,17 +66,35 @@ public class UserDaoImpl implements IUserDao {
 		return this.findUserByUsername(username) != null;
 	}
 
+	@Override
+	public boolean changePassword(String username, String password) {
+		if (!this.existsUser(username)) {
+			return false;
+		} else {
+			Connection conn;
+			try {
+				conn = new DBConnectionSQLServer().getConnection();
+
+				String sql = "update users set password = ? where username = ?";
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, password);
+				ps.setString(2, username);
+				ps.executeUpdate();
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		try {
 			IUserDao userDao = new UserDaoImpl();
-			UserModel user = new UserModel();
-			user.setUsername("lamduybao03");
-			user.setPassword("123");
-			user.setFullname("Lam Duy Bao");
-			System.out.println(userDao.addUser(user));
+			System.out.println(userDao.changePassword("ldb", "123"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
+
 }

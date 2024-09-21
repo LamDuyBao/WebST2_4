@@ -33,6 +33,12 @@ public class UserServiceImpl implements IUserService {
 		return userDao.addUser(user);
 	}
 
+
+	@Override
+	public boolean changePassword(String username, String password) {
+		return userDao.changePassword(username, password);
+	}
+
 	public static void main(String[] args) {
 		try {
 			IUserService userService = new UserServiceImpl();

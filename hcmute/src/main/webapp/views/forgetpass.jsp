@@ -13,8 +13,8 @@
 	<c:if test="${alert != null }">
 		<h3 class="alert alert-danger">${alert}</h3>
 	</c:if>
-	<form action="/hcmute/register" method="post">
-		<div class="container">
+	<form action="/hcmute/forgetpass" method="post">
+		<div>
 			<label for="username"><b>Username</b></label> <input type="text"
 				placeholder="Enter Username" name="username" required>
 		</div>
@@ -23,19 +23,14 @@
 				placeholder="Enter Password" name="password1" required>
 		</div>
 		<div>
-			<label for="password"><b>Retype Password</b></label> <input
-				type="password" placeholder="Enter Password" name="password2"
-				required>
+			<label for="password"><b>Retype Password</b></label> <input type="password"
+				placeholder="Enter Password" name="password2" required>
 		</div>
 		<div>
-			<label for="fullname"><b>Full name</b></label> <input type="text"
-				placeholder="Enter fullname" name="username" required>
+			<button type="submit">Login</button>
 		</div>
-		<div>
-			<button type="submit">Done</button>
-		</div>
-	</form>
 
+	</form>
 
 </body>
 </html>
